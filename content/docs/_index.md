@@ -1,13 +1,12 @@
 ---
 title: Documentation
 weight: 1
+description: Find the reference page for a protocol, feature, or integration in Schemo.
 ---
-
-Schemo is a desktop client for building requests, reading responses, and rerunning API tests. Start with a local workspace and connect integrations when you need them.
 
 ## Getting started
 
-{{< start-here >}}
+{{< topic-list "/docs/getting-started" >}}
 
 ## Protocols
 

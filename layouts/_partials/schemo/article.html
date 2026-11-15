@@ -1,18 +1,24 @@
 <main id="content" class="docs-main" tabindex="-1">
   <article>
     <header class="docs-title">
-      {{ if not .IsHome }}
+      {{ with where .Ancestors.Reverse "IsHome" false }}
         <nav class="docs-breadcrumbs" aria-label="Breadcrumb">
-          {{ range .Ancestors.Reverse }}
-            <a href="{{ .RelPermalink }}">{{ if .IsHome }}Home{{ else }}{{ .LinkTitle }}{{ end }}</a>
-            {{ partial "schemo/icon.html" "chevron-right" }}
+          {{ range $index, $ancestor := . }}
+            {{ if $index }}{{ partial "schemo/icon.html" "chevron-right" }}{{ end }}
+            <a href="{{ $ancestor.RelPermalink }}">{{ $ancestor.LinkTitle }}</a>
           {{ end }}
-          <span aria-current="page">{{ .LinkTitle }}</span>
         </nav>
       {{ end }}
       <h1>{{ .Title }}</h1>
       {{ with .Description }}<p>{{ . }}</p>{{ end }}
     </header>
+    {{ if .Params.visual_tracks }}{{ partial "schemo/guide-tracks.html" . }}{{ end }}
+    {{ if .Fragments.Headings }}
+      <details class="docs-inline-outline">
+        <summary>On this page {{ partial "schemo/icon.html" "chevron-down" }}</summary>
+        {{ replace .TableOfContents "TableOfContents" "InlineTableOfContents" | safeHTML }}
+      </details>
+    {{ end }}
     <div class="docs-prose content">
       {{ .Content }}
     </div>

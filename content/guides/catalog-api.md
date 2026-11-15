@@ -22,6 +22,7 @@ If port 8787 is taken, start it with another port, such as `PORT=8790 node catal
 | Method or protocol | Address | What to try |
 | --- | --- | --- |
 | GET | `{{baseUrl}}/products?category=audio` | Edit [query parameters]({{< relref "/docs/protocols/http#edit-query-parameters-and-headers" >}}). |
+| GET | `{{baseUrl}}/products/p-101` | Read a product by ID from a [related request]({{< relref "/guides/open-related-request" >}}). |
 | POST | `{{baseUrl}}/products` | Send a [JSON body]({{< relref "/docs/features/request-body#try-a-json-body" >}}) and check for **201 Created**. |
 | POST | `{{baseUrl}}/attachments` | [Upload an image and a label]({{< relref "/guides/upload-a-file" >}}) and confirm the received byte count. |
 | GET | `{{baseUrl}}/inventory` | Follow a [JSON:API relationship]({{< relref "/docs/features/response-inspector#follow-jsonapi-relationships" >}}). |
@@ -34,9 +35,11 @@ If port 8787 is taken, start it with another port, such as `PORT=8790 node catal
 | GET | `{{baseUrl}}/orders/o-3207` | Send the token as a Bearer token and [chain the requests]({{< relref "/docs/features/node-inspector#reuse-a-value-in-the-next-request" >}}). |
 | GET | `{{baseUrl}}/products.xml` | Read an XML response. |
 | GET | `{{baseUrl}}/slow` | Wait 1.5 seconds and find the call with the [Slow filter]({{< relref "/docs/features/history-and-transfer#find-a-previous-request" >}}). |
-| GET | `{{baseUrl}}/openapi.json` | [Import the API]({{< relref "/docs/features/import-and-export#choose-where-it-goes" >}}) as a collection. |
+| GET | `{{baseUrl}}/openapi.json` | [Import the API]({{< relref "/guides/import-openapi" >}}) as a collection. |
 
 The POST example returns the new product in its response. The list endpoint continues to serve the original five products.
+
+Send a negative price to get a structured validation error and [jump back to the field in the request]({{< relref "/guides/fix-a-request-field" >}}).
 
 ## Get a token
 

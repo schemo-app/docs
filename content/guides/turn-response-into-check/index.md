@@ -1,5 +1,6 @@
 ---
 title: Turn a response value into a regression check
+nav_title: Check a response value
 description: Generate a test from a JSON value and run it with the saved request.
 track: automate
 weight: 22

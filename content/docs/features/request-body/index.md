@@ -39,4 +39,6 @@ Use the format action to reindent JSON or XML. Use the search icon in the body e
 
 For an endpoint that expects a multipart upload, select **Form data**, add the named field from the API documentation, and choose **Make it a file field**. For an endpoint that expects the file bytes as the whole payload, select **Binary file**, then **Choose a file**.
 
+You can also drag a local file from your file manager onto the file field or into the **Binary file** drop area. Drop it on the field you want to fill.
+
 Follow [Upload a file with form data]({{< relref "/guides/upload-a-file" >}}) to send a file alongside a text field and verify the response.

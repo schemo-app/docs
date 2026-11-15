@@ -458,6 +458,14 @@ const server = createServer(async (request, response) => {
         return json(response, 200, filtered);
     }
 
+    const productId = /^\/products\/([^/]+)$/.exec(pathname)?.[1];
+    if (request.method === 'GET' && productId) {
+        const product = products.find(item => item.id === productId);
+        return product
+            ? json(response, 200, product)
+            : json(response, 404, { error: 'Unknown product' });
+    }
+
     if (request.method === 'GET' && pathname === '/inventory') {
         return json(response, 200, {
             data: products.map(jsonApiProduct),
@@ -476,6 +484,12 @@ const server = createServer(async (request, response) => {
             const { name, category, price } = JSON.parse(text);
             if (!name || !category || typeof price !== 'number') {
                 return json(response, 400, { error: 'Expected a name, category, and numeric price' });
+            }
+            if (price < 0) {
+                return json(response, 422, {
+                    message: 'Product validation failed',
+                    errors: { price: ['Use a price of zero or more.'] },
+                });
             }
             return json(response, 201, { id: 'p-demo', name, category, price, inStock: true });
         } catch {

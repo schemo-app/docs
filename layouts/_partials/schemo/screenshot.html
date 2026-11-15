@@ -1,0 +1,16 @@
+{{- $light := .page.Resources.Get (printf "%s-light.png" .name) -}}
+{{- $dark := .page.Resources.Get (printf "%s-dark.png" .name) -}}
+{{- if not (and $light $dark .alt) -}}
+  {{- errorf "Screenshot %q on %s requires light and dark PNGs and alt text" .name .page.Path -}}
+{{- else -}}
+  {{- /* Close-ups are captured at 2x and shown at their logical size. */ -}}
+  {{- $scale := cond (eq .detail true) 2 1 -}}
+  <figure class="schemo-screenshot not-prose{{ if .cover }} is-cover{{ end }}{{ if .detail }} is-detail{{ end }}">
+    {{ range $theme, $image := (dict "light" $light "dark" $dark) }}
+      <a class="schemo-shot-{{ $theme }}" href="{{ $image.RelPermalink }}">
+        <img src="{{ $image.RelPermalink }}" width="{{ div $image.Width $scale }}" height="{{ div $image.Height $scale }}" alt="{{ $.alt }}" data-zoomable{{ if not $.cover }} loading="lazy"{{ end }}>
+      </a>
+    {{ end }}
+    {{ with .caption }}<figcaption>{{ . }}</figcaption>{{ end }}
+  </figure>
+{{- end -}}

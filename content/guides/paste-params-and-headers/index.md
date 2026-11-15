@@ -1,5 +1,6 @@
 ---
 title: Paste query parameters and headers in bulk
+nav_title: Paste params and headers
 description: Turn spreadsheet columns, a query string, or copied headers into editable rows.
 track: build
 weight: 3

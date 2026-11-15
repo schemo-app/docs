@@ -31,4 +31,13 @@ Open the workspace menu, choose **Manage…**, and select the team workspace. **
 
 With permission to manage the team, you can change a member's role, remove a member, or revoke an invitation before it is accepted. To invite someone from this screen, add an invitation row, fill in the email and role, and press **Enter**. Someone with read-only access can browse and send saved requests. Changes to collections, environments, and cookies require write access.
 
+## Leave or delete
+
+Open the workspace menu, choose **Manage…**, and select the team workspace. The action at the bottom depends on your permissions.
+
+- **Leave the workspace** removes your membership and the workspace from your device. The other members keep access to the workspace and its data.
+- **Delete the workspace** is available to members with permission to delete it. It removes the workspace for everyone. A member with that permission can restore a deleted cloud workspace from **Trash** in the cloud panel during the retention period.
+
+If the workspace was active, Schemo switches to another workspace after you confirm.
+
 See [Schemo Cloud]({{< relref "/docs/integrations/cloud" >}}) for device sync, and [Import and export]({{< relref "/docs/features/import-and-export" >}}) to move collections between workspaces.

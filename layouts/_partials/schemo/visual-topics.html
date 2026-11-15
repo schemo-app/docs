@@ -1,0 +1,14 @@
+<div class="docs-visual-grid">
+  {{ range .Params.visual_topics }}
+    {{ $topic := index hugo.Data.visual_topics . }}
+    {{ with site.GetPage $topic.path }}
+      <a class="docs-visual-card" href="{{ .RelPermalink }}">
+        <span class="docs-visual-frame">{{ partial "schemo/visual-preview.html" $topic }}</span>
+        <span class="docs-visual-copy">
+          <span><strong>{{ $topic.title }}</strong><small>{{ $topic.summary }}</small></span>
+          {{ partial "schemo/icon.html" "arrow-right" }}
+        </span>
+      </a>
+    {{ else }}{{ errorf "Unknown visual topic page %s" $topic.path }}{{ end }}
+  {{ end }}
+</div>

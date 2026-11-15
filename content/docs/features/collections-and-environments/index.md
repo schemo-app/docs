@@ -1,5 +1,6 @@
 ---
 title: Collections and environments
+nav_title: Collections & environments
 weight: 3
 description: Save requests in collections and reuse them across environments.
 ---
@@ -17,6 +18,14 @@ Save related requests in a collection. Use folders to group them and put shared 
 - Open a collection's context menu to add a folder, run it, or jump to its authorization and variables.
 - Drag a request or folder to reorder it or move it into another collection. Use **Move to** in the context menu when the destination is easier to find by name.
 - Use **Rename** or **Duplicate** from the same menu. Hold **Cmd/Ctrl** while opening a saved request to keep it in its own tab.
+
+## Collection overview
+
+Open a collection and select **Overview**. Use **Filter by name or path** and the **Method** menu to narrow the list. You can select several methods at once, and requests are grouped by folder.
+
+After **Run all**, the table shows the status and time from the collection run. Select a row to open the request with its result if available. Select a folder name to open its overview.
+
+{{< screenshot name="collection-overview" alt="The Catalog API collection overview filtered to GET requests, with requests grouped by folder and the last response status and time" >}}
 
 ## Environment setup {#use-an-environment-variable}
 
@@ -37,6 +46,8 @@ The request resolves to the same endpoint as before. To use the request with ano
 {{< screenshot name="environment-editor" alt="The environment manager with Catalog · local selected and the baseUrl variable visible" >}}
 
 Put environment-specific values in environments and shared defaults in collection or folder variables. Use secret variables for credentials you want masked in normal request previews. See [Local data]({{< relref "/support/local-data" >}}) for storage and export behavior.
+
+In a collection's **Variables** tab, compare **In the collection** with **Now**. The **Now** column names the active environment and highlights its overrides. Hover the token in a request to check the value that request will use.
 
 Use the request's environment control to [pin an environment]({{< relref "/docs/features/template-variables" >}}) when a single request needs to keep using it while the rest of the workspace switches.
 

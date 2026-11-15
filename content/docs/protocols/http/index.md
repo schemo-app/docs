@@ -52,7 +52,7 @@ Clear a row's checkbox to skip that header or parameter on the next send without
 
 ## Copy as code {#copy-the-request-as-code}
 
-Open the menu on the arrow beside **Send** to copy the request as cURL, fetch (JS), wget, HTTPie, or PowerShell. Review the generated command before running it. Schemo tells you what it could not write out, such as a variable with no value or a token it has not obtained yet.
+Open the menu on the arrow beside **Send** to copy the request as cURL, fetch (JS), wget, HTTPie, or PowerShell. Review the generated command before running it. See [Copy one request]({{< relref "/docs/features/import-and-export#copy-one-request" >}}) for how the generated code handles credentials and file uploads.
 
 ## Authorization {#configure-authorization}
 

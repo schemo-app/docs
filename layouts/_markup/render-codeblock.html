@@ -1,0 +1,12 @@
+{{- $filename := .Attributes.filename | default "" -}}
+{{- $language := .Attributes.lang | default .Type -}}
+{{- $labels := dict "text" "Text" "sh" "Shell" "bash" "Shell" "json" "JSON" "javascript" "JavaScript" "xml" "XML" "yaml" "YAML" -}}
+<div class="hextra-code-block docs-code-block">
+  {{- if not $filename }}
+    <div class="docs-code-language">{{ index $labels $language | default ($language | title) | default "Text" }}</div>
+  {{- end }}
+  {{- partial "components/codeblock" (dict "filename" $filename "lang" $language "base_url" .Attributes.base_url "content" .Inner "options" .Options) -}}
+  {{- if or (eq site.Params.highlight.copy.enable nil) site.Params.highlight.copy.enable -}}
+    {{- partialCached "components/codeblock-copy-button" (dict "filename" $filename) $filename -}}
+  {{- end -}}
+</div>

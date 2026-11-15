@@ -1,0 +1,28 @@
+requests:
+  title: Build requests
+  summary: Set up URLs, headers, authorization, and request bodies.
+  path: /docs/protocols/http
+  page: /docs/features/request-body
+  image: json-post
+  crop: { x: 500, y: 110, width: 1280, height: 480 }
+responses:
+  title: Explore responses
+  summary: Read structured data, filter tables, and inspect timings.
+  path: /docs/features/response-inspector
+  page: /docs/features/response-inspector
+  image: table
+  crop: { x: 500, y: 730, width: 1280, height: 480 }
+automate:
+  title: Automate your checks
+  summary: Add assertions and run saved requests as a collection.
+  path: /docs/features/scripts-and-runs
+  page: /docs/features/scripts-and-runs
+  image: collection-run
+  crop: { x: 510, y: 280, width: 1440, height: 540 }
+share:
+  title: Sync and share
+  summary: Work across devices, invite your team, and publish collections.
+  path: /docs/integrations/cloud
+  page: /docs/integrations/cloud
+  image: share-published
+  crop: { x: 1760, y: 190, width: 800, height: 300 }

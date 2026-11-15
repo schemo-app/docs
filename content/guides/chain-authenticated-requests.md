@@ -1,5 +1,6 @@
 ---
 title: Pass a token from one request to another
+nav_title: Pass a token
 description: Capture a token into an environment variable and reuse it automatically in a protected request.
 track: automate
 weight: 21

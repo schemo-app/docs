@@ -1,1 +1,31 @@
-{{ define "main" }}{{ partial "schemo/article.html" . }}{{ end }}
+{{ define "main" }}
+  <main id="content" class="docs-main docs-home" tabindex="-1">
+    <header class="docs-title docs-home-title">
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}<p>{{ . }}</p>{{ end }}
+    </header>
+    <div class="docs-home-content">
+      <section aria-label="Get started">
+        <span class="docs-home-anchor" id="start-here"></span>
+        <span class="docs-home-anchor" id="guides-and-support"></span>
+        {{ partial "schemo/start-here.html" . }}
+      </section>
+      <section aria-labelledby="working-with-requests">
+        <div class="docs-home-section-header">
+          <h2 id="working-with-requests">Explore Schemo</h2>
+          <a href="{{ relref . "/docs" }}">All topics {{ partial "schemo/icon.html" "arrow-right" }}</a>
+        </div>
+        <span class="docs-home-anchor" id="integrations"></span>
+        {{ partial "schemo/visual-topics.html" . }}
+      </section>
+      <section class="docs-protocol-links" aria-label="Protocols" id="protocols">
+        <span>Protocols</span>
+        {{ range (site.GetPage "/docs/protocols").Pages.ByWeight }}
+          <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+        {{ end }}
+      </section>
+      {{ partial "schemo/home-guides.html" . }}
+      <div class="docs-prose docs-home-notes content">{{ .Content }}</div>
+    </div>
+  </main>
+{{ end }}

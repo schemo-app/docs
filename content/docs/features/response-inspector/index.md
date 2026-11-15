@@ -15,6 +15,8 @@ The response pane shows what the endpoint returned. The toolbar displays the sta
 | **Map** | Explore the structure and field types. |
 | **Table** | Browse an array as rows. Filter, sort, and export the data as CSV. |
 
+In a regular JSON **Tree**, use **Expand all** to open every branch or **Collapse all** to return to the root.
+
 Send the request from [Quick start]({{< relref "/docs/getting-started/quick-start" >}}) and select **Table**. Each post becomes a row. Select a column heading to sort the rows, or use search to find a value.
 
 {{< screenshot name="table" alt="The posts response displayed as a table with userId, id, title, and body columns" >}}
@@ -32,6 +34,12 @@ Select **Map** to get an overview of an unfamiliar response. The map groups entr
 Send `GET http://127.0.0.1:8787/inventory` with the [Catalog API]({{< relref "/guides/catalog-api" >}}) running. In **Tree**, open a product and look for its category relationship. Select the relationship to inspect the category in `included`. Use the breadcrumb to return to the original resource. Switch to **Raw** when checking the serialized `data`, `relationships`, and `included` members.
 
 {{< screenshot name="json-api" alt="Schemo grouping JSON:API products under DATA and their categories under INCLUDED" >}}
+
+## Copy a resource map
+
+For a JSON:API response, switch to **Map** and open **Copy** in the response tab row. Choose **Mermaid (erDiagram)** to paste the relationships into Markdown or documentation, **Graphviz DOT** for Graphviz, or **JSON** for a list of resource types, attributes, and relationships. The map describes the resources seen in the response.
+
+{{< screenshot name="resource-map-copy" alt="The JSON:API resource map with the Copy menu offering Mermaid, Graphviz DOT, and JSON" >}}
 
 ## XML and text {#read-xml-and-other-text}
 
@@ -53,6 +61,8 @@ Select a value in **Tree** and open its node actions to copy the value or its pa
 | **Cookies** | Look for cookies returned or sent during the request. |
 | **Timings** | See how long each phase of the exchange took. |
 | **Scripts** | Review output and post-response test results when the request runs a script. |
+
+The response search follows the selected tab. In **Headers**, it matches names and values. In **Cookies**, it matches names, values, and domains. Select the search icon or press **Cmd/Ctrl + F** on either tab.
 
 **Timings** shows the total time and how much of it was spent waiting for the first byte, then a bar for each phase: **DNS**, **TCP connect**, **TLS**, **Waiting for the answer**, and **Downloading**. The note under the bars tells you whether Schemo opened a new connection to the host or reused one, in which case no DNS, TCP, or TLS time was spent.
 

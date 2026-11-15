@@ -1,5 +1,6 @@
 ---
 title: Find where a slow request spent its time
+nav_title: Trace a slow request
 description: Use History and Timings to tell connection setup, server wait, and download apart.
 track: debug
 weight: 12

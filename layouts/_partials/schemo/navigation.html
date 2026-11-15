@@ -1,24 +1,24 @@
 {{- $area := .FirstSection -}}
 {{- if .IsHome }}{{ $area = site.GetPage "/docs" }}{{ end -}}
-<nav class="docs-nav" aria-label="Documentation">
-  <ul class="docs-areas">
-    {{ range site.Menus.main }}
-      <li><a href="{{ .URL }}"{{ if eq .Page $area }} class="is-active"{{ end }}{{ if $.Eq .Page }} aria-current="page"{{ end }}>
-        <span class="docs-nav-icon">{{ partial "schemo/icon.html" .Params.icon }}</span>{{ .Name }}
-      </a></li>
+<nav class="docs-nav" aria-label="{{ $area.LinkTitle }} pages">
+  <div class="docs-nav-sections">
+    <a href="{{ site.Home.RelPermalink }}"{{ if or .IsHome (eq .Section "docs") }} class="is-active"{{ end }}{{ if .IsHome }} aria-current="page"{{ end }}>Documentation</a>
+    {{ range slice "/guides" "/support" }}
+      {{ with site.GetPage . }}
+        <a href="{{ .RelPermalink }}"{{ if eq . $.FirstSection }} class="is-active"{{ end }}{{ if $.Eq . }} aria-current="page"{{ end }}>{{ .LinkTitle }}</a>
+      {{ end }}
     {{ end }}
-  </ul>
+  </div>
   {{ if eq $area.Section "docs" }}
-    {{ range $area.Sections.ByWeight }}
-      <div class="docs-nav-group">
-        <a class="docs-nav-label" href="{{ .RelPermalink }}"{{ if $.Eq . }} aria-current="page"{{ end }}>{{ .LinkTitle }}</a>
-        {{ partial "schemo/nav-links.html" (dict "pages" .Pages.ByWeight "current" $) }}
-      </div>
+    {{ range $section := $area.Sections.ByWeight }}
+      {{ partial "schemo/nav-group.html" (dict "title" $section.LinkTitle "pages" $section.Pages.ByWeight "overview" $section "current" $) }}
+    {{ end }}
+  {{ else if eq $area.Section "guides" }}
+    {{ range $group := $area.Params.nav_groups }}
+      {{ $pages := where $area.Pages.ByWeight "Params.track" $group.track }}
+      {{ partial "schemo/nav-group.html" (dict "title" $group.title "pages" $pages "current" $) }}
     {{ end }}
   {{ else }}
-    <div class="docs-nav-group">
-      <a class="docs-nav-label" href="{{ $area.RelPermalink }}"{{ if $.Eq $area }} aria-current="page"{{ end }}>{{ $area.LinkTitle }}</a>
-      {{ partial "schemo/nav-links.html" (dict "pages" $area.Pages.ByWeight "current" $) }}
-    </div>
+    {{ partial "schemo/nav-links.html" (dict "overview" $area "overviewTitle" $area.Title "pages" $area.Pages.ByWeight "current" $) }}
   {{ end }}
 </nav>

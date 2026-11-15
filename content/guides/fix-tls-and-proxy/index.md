@@ -1,5 +1,6 @@
 ---
 title: Diagnose TLS and proxy errors
+nav_title: TLS and proxy errors
 description: Identify a failing proxy tunnel or an untrusted HTTPS certificate and verify the fix in Schemo.
 track: debug
 weight: 13

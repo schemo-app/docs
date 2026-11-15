@@ -51,6 +51,14 @@ The tree also shows a readable date beside timestamps, so you can scan `placedAt
 
 Under **Address**, Node details lists the value's location as JSONPath, a jq filter, JavaScript, Python, and a Postman expression. Select a line to copy it.
 
+## Request errors
+
+When a supported JSON error response names a request field, **Node details** can show **Fault in the request**. Select the field link to open **Params** or **Headers**, or highlight the value in the JSON **Body** editor. See [Fix a request field from a response]({{< relref "/guides/fix-a-request-field" >}}).
+
+## Related requests
+
+For a value such as `productId`, **In your collection** can suggest saved requests with a matching parameter in their address. Select a suggestion to open an editable request with the value filled in. Review the address before sending it. See [Open a related request from a response]({{< relref "/guides/open-related-request" >}}).
+
 ## Objects and arrays {#use-an-object-or-array}
 
 For an object or array, Node details lists its members and adds actions under **Use**:

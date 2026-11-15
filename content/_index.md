@@ -1,43 +1,32 @@
 ---
 title: Schemo documentation
-description: Learn to send requests, inspect responses, and test APIs in the Schemo desktop app for macOS, Windows, and Linux.
+description: Send requests, explore responses, and test your APIs. Learn the essentials or jump straight to what you need.
+start_here:
+  - { path: /docs/getting-started/quick-start, label: Quick start }
+  - { path: /docs/getting-started/installation, label: Installation }
+  - { path: /guides/migrate-from-postman, label: Migrate from Postman }
+visual_topics: [requests, responses, automate, share]
+home_guides:
+  - path: /guides/import-openapi
+    label: Import an OpenAPI spec
+    summary: Generate a collection and send its first request.
+  - path: /guides/turn-response-into-check
+    label: Turn a response into a check
+    summary: Add a regression test from a value in the response.
+  - path: /guides/export-response-to-csv
+    label: Export filtered rows to CSV
+    summary: Save just the rows and columns you need.
+  - path: /guides/catalog-api
+    label: Try the Catalog API
+    summary: Run the local demo API used in the examples.
+  - path: /guides/trace-a-slow-request
+    label: Trace a slow request
+    summary: Find where the request spends its time.
+  - path: /guides/run-a-collection
+    label: Run a collection
+    summary: Test a sequence of requests against an environment.
 ---
 
-## Start here
+{{< anchor "how-schemo-works" >}}
 
-{{< start-here >}}
-
-{{< screenshot name="schemo" cover=true alt="Schemo showing a saved GET request, its query parameters, and the JSON response tree" >}}
-
-## Guides
-
-- [Import an OpenAPI spec]({{< relref "/guides/import-openapi" >}}) and send a generated request.
-- [Trace a slow request]({{< relref "/guides/trace-a-slow-request" >}}) to find time spent connecting, waiting, or downloading.
-- [Turn a response value into a check]({{< relref "/guides/turn-response-into-check" >}}) to catch a regression on the next run.
-- [Export filtered rows to CSV]({{< relref "/guides/export-response-to-csv" >}}) with just the columns you need.
-
-[Browse all guides]({{< relref "/guides" >}}) or run the [Catalog API]({{< relref "/guides/catalog-api" >}}) to follow the examples shown in the guides.
-
-## Local and cloud {#how-schemo-works}
-
-Start in a [local workspace]({{< relref "/docs/features/workspaces" >}}) without signing in. Connect [Schemo Cloud]({{< relref "/docs/integrations/cloud" >}}) to sync workspaces, work with a team, or publish collection documentation.
-
-## Protocols
-
-{{< topic-list "/docs/protocols" >}}
-
-## Features {#working-with-requests}
-
-- [Collections and environments]({{< relref "/docs/features/collections-and-environments" >}}) for reusable requests, API hosts, and credentials.
-- [Response inspector]({{< relref "/docs/features/response-inspector" >}}) for response bodies, headers, and timings.
-- [Scripts and collection runs]({{< relref "/docs/features/scripts-and-runs" >}}) for checks you can repeat.
-
-[Browse all features]({{< relref "/docs/features" >}}).
-
-## Integrations
-
-{{< topic-list "/docs/integrations" >}}
-
-## Support {#guides-and-support}
-
-Find help with [connection or startup errors]({{< relref "/support" >}}), look up a [setting]({{< relref "/support/settings" >}}), or [back up and move your local data]({{< relref "/support/local-data" >}}).
+Work locally without an account. Connect [Schemo Cloud]({{< relref "/docs/integrations/cloud" >}}) to sync workspaces, collaborate, or publish your collections.

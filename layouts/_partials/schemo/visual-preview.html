@@ -1,0 +1,14 @@
+{{- $page := site.GetPage .page -}}
+{{- $crop := .crop -}}
+<span class="docs-visual-preview" aria-hidden="true" style="aspect-ratio: {{ $crop.width }} / {{ $crop.height }}">
+  {{- range $theme := slice "light" "dark" -}}
+    {{- with $page.Resources.Get (printf "%s-%s.png" $.image $theme) -}}
+      {{- $width := div (mul .Width 100.0) $crop.width -}}
+      {{- $left := div (mul $crop.x -100.0) $crop.width -}}
+      {{- $top := div (mul $crop.y -100.0) $crop.height -}}
+      <img class="schemo-shot-{{ $theme }}" src="{{ .RelPermalink }}" alt="" width="{{ .Width }}" height="{{ .Height }}" loading="lazy" style="width: {{ $width }}%; left: {{ $left }}%; top: {{ $top }}%;">
+    {{- else -}}
+      {{- errorf "Missing visual preview %s-%s on %s" $.image $theme $.page -}}
+    {{- end -}}
+  {{- end -}}
+</span>

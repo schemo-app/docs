@@ -10,30 +10,31 @@ Open **Import** with **Cmd/Ctrl + O**, from the command palette, or from **File 
 
 ## Choose a source
 
-| Source | What it reads |
-| --- | --- |
-| **Another workspace** | Copies collections from one of your other workspaces. |
-| **Published page** | A collection someone [published with Schemo Cloud]({{< relref "/docs/integrations/cloud#publish-a-collection" >}}). Paste the page address. |
-| **Schemo** | A Schemo collection export or a workspace backup (`.json`). |
-| **Postman** | A collection in format v2.0 or v2.1 (`.json`). See [Migrate from Postman]({{< relref "/guides/migrate-from-postman" >}}). |
-| **Insomnia** | An Insomnia v4 export (`.json`). |
-| **OpenAPI** | Swagger 2.0, OpenAPI 3.0, or 3.1 (`.yaml` or `.json`). Each operation becomes a request. |
-| **HAR** | A recording from browser DevTools, Charles, or Proxyman (`.har`). |
-| **cURL** | One or more `curl` commands pasted as text. |
+| Source | Input | What it brings in |
+| --- | --- | --- |
+| **Another workspace** | Collections selected in Schemo | Copies the selected collections from another workspace into the active one. |
+| **Published page** | Page URL | Recreates a collection someone [published with Schemo Cloud]({{< relref "/docs/integrations/cloud#publish-a-collection" >}}) from the requests and variables on the page. |
+| **Schemo** | JSON file | Restores the saved collections and environments in a Schemo export. |
+| **Postman** | JSON file or link | Reads v2.0 and v2.1 collections and Postman environment exports. See [Migrate from Postman]({{< relref "/guides/migrate-from-postman" >}}). |
+| **Insomnia** | JSON file | Reads collections and environments from an Insomnia v4 export. |
+| **OpenAPI** | YAML or JSON file or link | Creates a collection from Swagger 2.0 or OpenAPI 3.0 or 3.1, with requests for its operations. |
+| **HAR** | HAR file | Recreates the recorded requests as editable requests. Use the original recording to review past responses and timings. |
+| **cURL** | Pasted commands | Creates requests from one or more `curl` commands. |
 
-For a file source, drag the file into the dialog or choose it. OpenAPI and other file sources also accept **By link**: paste the address of the document and press **Enter**.
+For file input, drag the file into the dialog or choose it. For URL input, paste the address and press **Enter**.
+
+OpenAPI import reads parameters, supported authorization, and request bodies where the spec supplies them. Schemo resolves `$ref` entries within the spec. Bundle any external references into the document before importing. For a worked example, see [Start a collection from an OpenAPI URL]({{< relref "/guides/import-openapi" >}}).
 
 ## Import destination {#choose-where-it-goes}
 
-**Where** offers a new collection named after the source, or one of the collections in the active workspace. When a file holds several collections, Schemo can import them **As separate collections**. The import button shows how many requests will be added.
+**Where** controls where collections appear in the active workspace. Choose **New collection** to add them at the top level, or choose an existing collection or folder to nest the imported collections under it. When copying from **Another workspace**, the top-level choice is **As separate collections**. The import button shows how many requests will be added when importing a file, link, or pasted command.
 
-{{< screenshot name="import-openapi" alt="Import from OpenAPI by link, reading the Catalog API document into a new collection with four requests" >}}
+## Before you send
 
-Try it with the [Catalog API]({{< relref "/guides/catalog-api" >}}): choose **OpenAPI → By link** and enter `http://127.0.0.1:8787/openapi.json`. Schemo reads the four operations and offers a new **Catalog API** collection.
-
-Follow [Start a collection from an OpenAPI URL]({{< relref "/guides/import-openapi" >}}) to run an imported operation.
-
-After importing, check the active environment, authorization, and any file fields before you send the requests. Paths from another machine and redacted secrets do not come with the file.
+- Check the active environment and the resolved API address. OpenAPI import creates a `baseUrl` variable under the imported collection's **Variables**. Fill it in if the spec leaves the server address open. An environment or global variable of the same name can override this collection value.
+- Fill in required values in **Params**, including any [path parameters]({{< relref "/docs/protocols/http#fill-a-path-parameter" >}}).
+- Review **Authorization** and fill in redacted secrets or missing credentials.
+- Re-select upload files and local schemas if their saved paths are unavailable on this machine.
 
 ## Paste cURL {#paste-a-single-command}
 
@@ -59,7 +60,9 @@ Choose **Copy** to put the export on the clipboard or **Save…** to write a fil
 
 Open the menu on the arrow beside **Send** to copy the link or the request as cURL, fetch (JS), wget, HTTPie, or PowerShell. In the sidebar, a request's menu also offers **Copy as cURL** and **Copy the address**.
 
-Schemo tells you when a copy is incomplete: a variable with no value is left as written, an OAuth token that has not been obtained is not fetched, and Digest credentials and file uploads are not written out.
+Schemo lists any omissions after copying. An unresolved variable stays as `{{name}}`. Copying uses an OAuth token already held in Schemo, and getting a new token is a separate action. For **Digest auth**, add the credentials in the tool that will run the request.
+
+File contents stay on disk. For a **Binary file** body, cURL and PowerShell refer to the local file by path. For **Form data** with a file, cURL and HTTPie include the text fields and the file path. Update the path if you run the command on another machine. If the chosen format omits the upload, use one of these formats or add the upload to the generated code.
 
 ## Import .env {#import-environment-variables}
 

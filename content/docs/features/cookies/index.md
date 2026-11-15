@@ -14,6 +14,12 @@ The response **Cookies** tab shows cookies associated with the exchange. Use it 
 
 {{< screenshot name="session-cookie" alt="The Cookies tab showing the catalog_session cookie returned by the Catalog API" >}}
 
+## Undo cookie changes
+
+If a response changed the stored cookies, its **Cookies** tab offers **Undo these changes** next to the cookie manager button. Use it to roll back the cookie jar changes from that response. The server keeps its own session state. If a later response set a different value for the same cookie, that newer value takes precedence.
+
+Try it after the first `GET /session` from a fresh workspace. Check that `catalog_session` was added, select **Undo these changes**, then open the cookie manager to confirm the cookie is gone.
+
 ## Cookie manager {#manage-stored-cookies}
 
 Schemo keeps cookies from responses in the workspace's cookie jar and sends them with later requests to the same domain. To open the cookie manager, select a cookie row in the response **Cookies** tab, or select the cookie icon in the response toolbar. The manager opens at the domain of that response.

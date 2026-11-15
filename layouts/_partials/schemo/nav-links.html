@@ -1,5 +1,8 @@
 <ul class="docs-nav-links">
+  {{ with .overview }}
+    <li><a href="{{ .RelPermalink }}"{{ if $.current.Eq . }} aria-current="page"{{ end }}>{{ $.overviewTitle | default "Overview" }}</a></li>
+  {{ end }}
   {{ range .pages }}
-    <li><a href="{{ .RelPermalink }}"{{ if $.current.Eq . }} aria-current="page"{{ end }}>{{ .LinkTitle }}</a></li>
+    <li><a href="{{ .RelPermalink }}"{{ if $.current.Eq . }} aria-current="page"{{ end }}>{{ .Params.nav_title | default .LinkTitle }}</a></li>
   {{ end }}
 </ul>

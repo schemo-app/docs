@@ -1,23 +1,23 @@
 ---
-title: Run a collection against an environment
+title: Run a collection
 track: automate
 weight: 23
-description: Use a collection runner to check requests against different API instances.
+description: Run saved requests, find a failed test, and verify the fix.
 ---
 
-Run a collection after an API change, or check how the same requests behave with a different environment. This example runs two requests together and reproduces a failing assertion by changing one variable.
+Use a collection run to check several endpoints at once. In this example, both requests return **200 OK**, but one test fails because the request sends the wrong category.
 
 ## Prepare requests {#prepare-the-requests}
 
-1. Start the [Catalog API]({{< relref "/guides/catalog-api" >}}). Save these two GET requests into a collection, or import **Catalog checks** from the [Postman guide]({{< relref "/guides/migrate-from-postman" >}}).
+1. Start the [Catalog API]({{< relref "/guides/catalog-api" >}}). Save these two GET requests in a collection named **Catalog checks**, or import it from the [Postman guide]({{< relref "/guides/migrate-from-postman" >}}).
 
    | Request | Address |
    | --- | --- |
-   | List products | `{{baseUrl}}/products?category={{category}}` |
+   | List audio products | `{{baseUrl}}/products?category={{category}}` |
    | Read inventory | `{{baseUrl}}/inventory` |
 
 2. In the list request, use the `{{category}}` variable as the query value. If you imported the collection, replace its literal `audio` value in **Params**.
-3. Set up an environment with `baseUrl` set to `http://127.0.0.1:8787` and `category` set to `audio`.
+3. In the active environment, set `baseUrl` to `http://127.0.0.1:8787` and `category` to `travel` to reproduce the failure.
 4. In the list request's post-response **Scripts** editor, add this check if you created the request manually.
 
    ```javascript
@@ -27,12 +27,20 @@ Run a collection after an API change, or check how the same requests behave with
    });
    ```
 
-## Run and compare
+{{< anchor "run-and-compare" >}}
 
-Select the environment and open the collection. Select **Run all**, then open **Runs**. Both requests return **200**, and the list request's assertion passes.
+## Find the failure
 
-Create a second environment with the same `baseUrl` and `category` set to `travel`. Select it and start another run. The list request still returns **200**, but its assertion fails because the response has one product. Open the failed result to see the assertion and the response. Use the run selector to return to the earlier result.
+1. Open **Catalog checks**, select **Run all**, then open **Runs**. Both requests have status `200`. The **Tests** column shows **0 of 1** for **List audio products**.
+2. Select **Errors 1** to show only failed requests. This includes requests whose response arrived successfully but failed a test.
+3. Select **0 of 1** in the **Tests** column. **Returns two audio products** reports **expected 2, got 1**. Choose **Open request** to see the saved request and the response from that run. The response **Body** contains one travel product, and **Params** uses `{{category}}` for the category filter.
 
-{{< screenshot name="run-with-failure" alt="The Catalog travel run showing 200 responses and a failed assertion with expected 2, got 1" >}}
+{{< screenshot name="run-with-failure" alt="The Errors 1 control and the open Tests popover for a 200 response, with expected 2, got 1" >}}
 
-For a comparison across API instances, change `baseUrl` in the second environment. Keep the variable names the same. If a request is pinned to an environment, clear or update the pin before comparing. Run [WebSocket]({{< relref "/docs/protocols/websocket" >}}) and [SSE]({{< relref "/docs/protocols/sse" >}}) requests individually.
+## Run again
+
+1. Open **Edit variables…** from the environment menu and change `category` to `audio` in the same environment.
+2. Return to **Catalog checks → Runs** and select **Repeat**. Turn off the **Errors** filter if it is still on.
+3. In the new run, check that **List audio products** shows **1 of 1** in **Tests** and the **Errors** count is `0`.
+
+Use the run selector to reopen the earlier result and check the response that originally failed. Run [WebSocket]({{< relref "/docs/protocols/websocket" >}}) and [SSE]({{< relref "/docs/protocols/sse" >}}) requests individually.

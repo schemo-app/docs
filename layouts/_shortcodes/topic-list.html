@@ -10,7 +10,7 @@
 <dl class="docs-topics not-prose">
   {{ range $pages }}
     <div>
-      <dt><a href="{{ .RelPermalink }}">{{ .LinkTitle }}{{ partial "schemo/icon.html" "arrow-right" }}</a></dt>
+      <dt><a href="{{ .RelPermalink }}">{{ .Params.nav_title | default .LinkTitle }}{{ partial "schemo/icon.html" "arrow-right" }}</a></dt>
       {{ with .Description }}<dd>{{ . }}</dd>{{ end }}
     </div>
   {{ end }}

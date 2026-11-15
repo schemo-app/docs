@@ -1,5 +1,6 @@
 ---
 title: Export just the response rows you need
+nav_title: Export rows to CSV
 description: Filter a JSON array, choose columns, and save the result as CSV.
 track: debug
 weight: 13

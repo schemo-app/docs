@@ -45,8 +45,12 @@ pm.test('An API host is configured', function () {
 
 ## Run a collection
 
-Open the collection and select **Run all**. The runner executes saved requests in order using the collection's settings and the selected environment. Open **Runs** to review the latest run and inspect failures by request. You can repeat a run to compare the result after a change.
+Open the collection and select **Run all**. The runner executes saved requests in order using the collection's settings and the selected environment. Open **Runs** to review the latest run, or use the run selector to open an earlier result.
 
 {{< screenshot name="collection-run" alt="The Catalog checks collection run with two 200 responses and a passing assertion" >}}
 
-See [Run a collection against an environment]({{< relref "/guides/run-a-collection" >}}) for a run that compares a passing result with a failed assertion.
+## Inspect failures
+
+Select **Errors** (**Show only failed requests**) to filter the run. A failed check appears here even when the server returns **200 OK**. On a failed row, select the count in **Tests** to see the check and its error. Choose **Open request** to read the response from that run. After correcting the request or its variables, select **Repeat** in **Runs** to verify the fix.
+
+Follow [Run a collection]({{< relref "/guides/run-a-collection#find-the-failure" >}}) for a worked example.

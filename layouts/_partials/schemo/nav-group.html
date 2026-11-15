@@ -1,0 +1,31 @@
+<section class="docs-nav-group">
+  <h2>{{ with .overview }}<a href="{{ .RelPermalink }}"{{ if $.current.Eq . }} aria-current="page"{{ end }}>{{ $.title }}</a>{{ else }}{{ .title }}{{ end }}</h2>
+  <div class="docs-nav-children">
+    {{ $pages := .pages }}
+    {{ $subgroups := slice }}
+    {{ with .overview }}{{ $subgroups = .Params.nav_groups }}{{ end }}
+    {{ with $subgroups }}
+      {{ $listed := slice }}
+      {{ range . }}
+        {{ $group := slice }}
+        {{ range .pages }}
+          {{ with $.overview.GetPage . }}
+            {{ $group = $group | append . }}
+          {{ else }}
+            {{ errorf "Unknown menu page %q in %s" . $.overview.Path }}
+          {{ end }}
+        {{ end }}
+        {{ $listed = $listed | append $group }}
+        <div class="docs-nav-subgroup">
+          <p>{{ .title }}</p>
+          {{ partial "schemo/nav-links.html" (dict "pages" $group "current" $.current) }}
+        </div>
+      {{ end }}
+      {{ with complement $listed $pages }}
+        {{ partial "schemo/nav-links.html" (dict "pages" . "current" $.current) }}
+      {{ end }}
+    {{ else }}
+      {{ partial "schemo/nav-links.html" (dict "pages" $pages "current" .current) }}
+    {{ end }}
+  </div>
+</section>

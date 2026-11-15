@@ -1,0 +1,9 @@
+<nav class="docs-guide-tracks" aria-label="Guide topics">
+  {{ range .Params.visual_tracks }}
+    {{ $topic := index hugo.Data.visual_topics .visual }}
+    <a href="#{{ .anchor }}">
+      <span class="docs-visual-frame">{{ partial "schemo/visual-preview.html" $topic }}</span>
+      <span>{{ .title }} {{ partial "schemo/icon.html" "arrow-right" }}</span>
+    </a>
+  {{ end }}
+</nav>

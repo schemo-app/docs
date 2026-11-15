@@ -1,0 +1,13 @@
+<div class="docs-start">
+  <span>Start here</span>
+  {{ range $route := .Params.start_here }}
+    {{ with site.GetPage $route.path }}
+      <a href="{{ .RelPermalink }}">
+        {{ $route.label }}
+        {{ partial "schemo/icon.html" "arrow-right" }}
+      </a>
+    {{ else }}
+      {{ errorf "Missing start page %s" $route.path }}
+    {{ end }}
+  {{ end }}
+</div>

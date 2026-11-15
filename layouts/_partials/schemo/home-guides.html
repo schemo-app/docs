@@ -1,0 +1,22 @@
+<section aria-labelledby="guides">
+  <div class="docs-home-section-header">
+    <h2 id="guides">Guides</h2>
+    <a href="{{ relref . "/guides" }}">All guides {{ partial "schemo/icon.html" "arrow-right" }}</a>
+  </div>
+  <div class="docs-home-guides">
+    <ul class="docs-home-guide-list">
+      {{ range $guide := .Params.home_guides }}
+        {{ with site.GetPage $guide.path }}
+          <li>
+            <a href="{{ .RelPermalink }}">
+              <span><strong>{{ $guide.label }}</strong><small>{{ $guide.summary }}</small></span>
+              {{ partial "schemo/icon.html" "arrow-right" }}
+            </a>
+          </li>
+        {{ else }}
+          {{ errorf "Missing home guide %s" $guide.path }}
+        {{ end }}
+      {{ end }}
+    </ul>
+  </div>
+</section>

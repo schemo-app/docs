@@ -22,20 +22,16 @@ menu:
     - name: Documentation
       pageRef: /docs
       weight: 1
-      params:
-        icon: book-open
     - name: Guides
       pageRef: /guides
       weight: 2
-      params:
-        icon: check-circle
     - name: Support
       pageRef: /support
       weight: 3
-      params:
-        icon: question-mark-circle
 
 params:
+  imageZoom:
+    js: vendor/medium-zoom/medium-zoom.min.js
   description: Learn to send requests, inspect responses, and test APIs in the Schemo desktop app.
   repositoryURL: https://github.com/schemo-app/schemo
   downloadURL: https://github.com/schemo-app/schemo/releases/latest
