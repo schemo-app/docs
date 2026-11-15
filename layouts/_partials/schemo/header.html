@@ -1,0 +1,14 @@
+<header class="docs-header">
+  <div class="docs-header-inner">
+    <a class="docs-brand" href="{{ site.Home.RelPermalink }}" aria-label="Schemo Docs home">
+      <img src="{{ "images/schemo.svg" | relURL }}" alt="" width="28" height="28">
+      <span>Schemo</span><span class="docs-brand-context">Docs</span>
+    </a>
+    <div class="docs-search">{{ partial "components/search-trigger.html" (dict) }}</div>
+    <div class="docs-header-actions">
+      <a class="docs-icon-button" href="{{ site.Params.repositoryURL }}" aria-label="Schemo on GitHub" title="Schemo on GitHub">{{ partial "schemo/icon.html" "github" }}</a>
+      {{ partial "theme-toggle.html" (dict "hideLabel" true "iconHeight" 18 "location" "top" "class" "docs-icon-button") }}
+      <a class="docs-download" href="{{ site.Params.downloadURL }}" aria-label="Download Schemo">{{ partial "schemo/icon.html" "download" }} <span>Download</span></a>
+    </div>
+  </div>
+</header>

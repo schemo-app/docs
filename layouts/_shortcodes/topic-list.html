@@ -1,0 +1,17 @@
+{{- $section := .Page -}}
+{{- if not .IsNamedParams -}}
+  {{- with .Get 0 }}{{ $section = site.GetPage . }}{{ end -}}
+{{- end -}}
+{{- if not $section }}{{ errorf "Unknown topic list section at %s" .Position }}{{ end -}}
+{{- $pages := $section.Pages.ByWeight -}}
+{{- if .IsNamedParams -}}
+  {{- with .Get "track" }}{{ $pages = where $pages "Params.track" "eq" . }}{{ end -}}
+{{- end -}}
+<dl class="docs-topics not-prose">
+  {{ range $pages }}
+    <div>
+      <dt><a href="{{ .RelPermalink }}">{{ .LinkTitle }}{{ partial "schemo/icon.html" "arrow-right" }}</a></dt>
+      {{ with .Description }}<dd>{{ . }}</dd>{{ end }}
+    </div>
+  {{ end }}
+</dl>

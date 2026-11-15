@@ -1,16 +1,22 @@
 {{- $name := .Get "name" -}}
 {{- $alt := .Get "alt" -}}
-{{- $light := .Page.Resources.Get (printf "%s-light.png" $name) -}}
-{{- $dark := .Page.Resources.Get (printf "%s-dark.png" $name) -}}
+{{- $detail := .Get "detail" -}}
+{{- $page := .Page -}}
+{{- with .Get "page" }}{{ $page = site.GetPage . }}{{ end -}}
+{{- if not $page }}{{ errorf "Unknown screenshot page at %s" .Position }}{{ end -}}
+{{- $light := $page.Resources.Get (printf "%s-light.png" $name) -}}
+{{- $dark := $page.Resources.Get (printf "%s-dark.png" $name) -}}
 {{- if not (and $light $dark $alt) -}}
   {{- errorf "Screenshot %q at %s requires light and dark PNGs and alt text" $name .Position -}}
 {{- else -}}
-  <figure class="schemo-screenshot">
+  {{- /* Close-ups are captured at 2x and shown at their logical size rather than stretched. */ -}}
+  {{- $scale := cond (eq $detail true) 2 1 -}}
+  <figure class="schemo-screenshot not-prose{{ if .Get "cover" }} is-cover{{ end }}{{ if $detail }} is-detail{{ end }}">
     <a class="schemo-shot-light" href="{{ $light.RelPermalink }}">
-      <img src="{{ $light.RelPermalink }}" width="{{ $light.Width }}" height="{{ $light.Height }}" alt="{{ $alt }}" loading="lazy">
+      <img src="{{ $light.RelPermalink }}" width="{{ div $light.Width $scale }}" height="{{ div $light.Height $scale }}" alt="{{ $alt }}" loading="lazy">
     </a>
     <a class="schemo-shot-dark" href="{{ $dark.RelPermalink }}">
-      <img src="{{ $dark.RelPermalink }}" width="{{ $dark.Width }}" height="{{ $dark.Height }}" alt="{{ $alt }}" loading="lazy">
+      <img src="{{ $dark.RelPermalink }}" width="{{ div $dark.Width $scale }}" height="{{ div $dark.Height $scale }}" alt="{{ $alt }}" loading="lazy">
     </a>
     {{- with .Get "caption" }}<figcaption>{{ . }}</figcaption>{{ end }}
   </figure>

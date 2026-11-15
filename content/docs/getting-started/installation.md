@@ -1,7 +1,7 @@
 ---
 title: Installation
 weight: 1
-description: Install the Schemo desktop app from GitHub Releases.
+description: Install Schemo on macOS, Windows, or Linux.
 ---
 
 Download the package for your platform from [Schemo Releases](https://github.com/schemo-app/schemo/releases/latest). This documentation covers Schemo **0.5.0**.

@@ -1,0 +1,69 @@
+{
+  "info": {
+    "name": "Catalog checks",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "List audio products",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Returns two audio products', function () {",
+                  "  pm.expect(pm.response.code).to.equal(200);",
+                  "  pm.expect(pm.response.json().length).to.equal(2);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/products?category=audio",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "products"
+              ],
+              "query": [
+                {
+                  "key": "category",
+                  "value": "audio"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Read inventory",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/inventory",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "inventory"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{{- $area := .FirstSection -}}
+{{- if .IsHome }}{{ $area = site.GetPage "/docs" }}{{ end -}}
+<nav class="docs-nav" aria-label="Documentation">
+  <ul class="docs-areas">
+    {{ range site.Menus.main }}
+      <li><a href="{{ .URL }}"{{ if eq .Page $area }} class="is-active"{{ end }}{{ if $.Eq .Page }} aria-current="page"{{ end }}>
+        <span class="docs-nav-icon">{{ partial "schemo/icon.html" .Params.icon }}</span>{{ .Name }}
+      </a></li>
+    {{ end }}
+  </ul>
+  {{ if eq $area.Section "docs" }}
+    {{ range $area.Sections.ByWeight }}
+      <div class="docs-nav-group">
+        <a class="docs-nav-label" href="{{ .RelPermalink }}"{{ if $.Eq . }} aria-current="page"{{ end }}>{{ .LinkTitle }}</a>
+        {{ partial "schemo/nav-links.html" (dict "pages" .Pages.ByWeight "current" $) }}
+      </div>
+    {{ end }}
+  {{ else }}
+    <div class="docs-nav-group">
+      <a class="docs-nav-label" href="{{ $area.RelPermalink }}"{{ if $.Eq $area }} aria-current="page"{{ end }}>{{ $area.LinkTitle }}</a>
+      {{ partial "schemo/nav-links.html" (dict "pages" $area.Pages.ByWeight "current" $) }}
+    </div>
+  {{ end }}
+</nav>

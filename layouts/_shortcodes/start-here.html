@@ -1,0 +1,15 @@
+<div class="docs-start not-prose">
+  {{ $paths := slice "/docs/getting-started/installation" "/docs/getting-started/quick-start" "/guides/migrate-from-postman" }}
+  {{ $icons := slice "download" "play" "switch-horizontal" }}
+  {{ range $i, $path := $paths }}
+    {{ with site.GetPage $path }}
+      <a href="{{ .RelPermalink }}">
+        <span class="docs-start-icon">{{ partial "schemo/icon.html" (index $icons $i) }}</span>
+        <span><strong>{{ .LinkTitle }}</strong><small>{{ .Description }}</small></span>
+        {{ partial "schemo/icon.html" "arrow-right" }}
+      </a>
+    {{ else }}
+      {{ errorf "Missing start page %s" $path }}
+    {{ end }}
+  {{ end }}
+</div>

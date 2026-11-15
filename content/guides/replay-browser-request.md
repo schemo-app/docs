@@ -1,13 +1,18 @@
 ---
 title: Replay a browser request
-weight: 3
+track: debug
+weight: 11
+description: Reproduce a call a web page made, change it, and keep it in a collection.
 ---
 
-Use [Schemo Bridge]({{< relref "/docs/integrations/browser-capture" >}}) to inspect what a site sent and reproduce the API call in the desktop client.
+When a site behaves differently from your saved requests, the fastest way to find out why is to send exactly what the browser sent. This guide uses [Schemo Bridge]({{< relref "/docs/integrations/browser-capture" >}}) to capture the call and Schemo to reproduce it.
 
-1. Start Schemo and arm capture on the browser tab.
-2. Perform the action that triggers the request. Open **Capture** in Schemo and find the URL.
-3. Select the exchange and inspect its method, parameters, response, and headers.
-4. Repeat it from Schemo. If you need to change inputs first, open the request in the editor and review the URL and authorization before sending.
+1. Start Schemo, open **Capture**, and arm capture on the browser tab with the Schemo mark in the toolbar.
+2. In the browser, do the action that makes the request, such as opening an order.
+3. In **Capture**, find the request. Type part of its address in the filter, or select **Errors** if the call failed.
+4. Select the row and open **Request** to compare what the browser sent with your saved request: the URL, the `authorization` and `cookie` headers, and the body.
+5. Select **Repeat**. The request opens as a new tab with the browser's method, URL, headers, and body.
+6. Send it. If you get the same answer as the browser, the difference is in your saved request. Remove headers one at a time and send again to find the one that matters.
+7. To keep the request, press **Ctrl+S** (**Cmd+S** on macOS) and choose a collection. Replace tokens and cookies with [variables]({{< relref "/docs/features/template-variables" >}}) first, so the saved request does not hold a session that will expire.
 
-Repeating a request sends it to the original API. For a request that creates or changes data, use a test environment if the action should only be reproduced for debugging.
+Repeating a request calls the original API with the original credentials. For a request that creates or changes data, point it at a test environment before you send it.

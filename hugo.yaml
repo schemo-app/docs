@@ -22,41 +22,22 @@ menu:
     - name: Documentation
       pageRef: /docs
       weight: 1
+      params:
+        icon: book-open
     - name: Guides
       pageRef: /guides
       weight: 2
+      params:
+        icon: check-circle
     - name: Support
       pageRef: /support
       weight: 3
-    - name: Download
-      url: https://github.com/schemo-app/schemo/releases/latest
-      weight: 4
-    - name: Search
-      weight: 5
       params:
-        type: search
-    - name: GitHub
-      url: https://github.com/schemo-app/schemo
-      weight: 7
-      params:
-        icon: github
-    - name: Theme
-      weight: 6
-      params:
-        type: theme-toggle
+        icon: question-mark-circle
 
 params:
   description: Learn to send requests, inspect responses, and test APIs in the Schemo desktop app.
-  navbar:
-    logo:
-      path: images/schemo.svg
-      width: 30
-      height: 30
+  repositoryURL: https://github.com/schemo-app/schemo
+  downloadURL: https://github.com/schemo-app/schemo/releases/latest
   theme:
     default: system
-    displayToggle: true
-  footer:
-    displayCopyright: false
-    displayPoweredBy: false
-  editURL:
-    enable: false

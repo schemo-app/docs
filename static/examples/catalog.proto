@@ -1,0 +1,35 @@
+// The service catalog-grpc.mjs runs. Import this file in Schemo when you want to skip reflection.
+syntax = "proto3";
+
+package catalog.v1;
+
+service Inventory {
+  // Returns one product, or NOT_FOUND for an unknown id.
+  rpc GetProduct(GetProductRequest) returns (Product);
+  // Streams the stock of every product in a category, one message every 400 ms.
+  rpc WatchStock(WatchStockRequest) returns (stream StockUpdate);
+}
+
+message GetProductRequest {
+  string id = 1;
+}
+
+message Product {
+  string id = 1;
+  string name = 2;
+  string category = 3;
+  double price = 4;
+  bool in_stock = 5;
+}
+
+message WatchStockRequest {
+  // audio, office or travel; empty for all products.
+  string category = 1;
+}
+
+message StockUpdate {
+  string id = 1;
+  string name = 2;
+  bool in_stock = 3;
+  int32 quantity = 4;
+}

@@ -17,7 +17,7 @@ Send a request to [JSONPlaceholder](https://jsonplaceholder.typicode.com/) and i
 
 3. Open **Params**. The `userId` row should contain `1`. Editing this row updates the query in the address.
 
-## Send and read the response
+## Read the response {#send-and-read-the-response}
 
 Select **Send**. The lower pane shows the status, elapsed time, body size, and response tabs. A successful request returns **200 OK** and an array of posts. In **Body → Tree**, expand a post to inspect its `userId`, `id`, `title`, and `body`.
 

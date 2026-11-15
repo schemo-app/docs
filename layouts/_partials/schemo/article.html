@@ -1,0 +1,25 @@
+<main id="content" class="docs-main" tabindex="-1">
+  <article>
+    <header class="docs-title">
+      {{ if not .IsHome }}
+        <nav class="docs-breadcrumbs" aria-label="Breadcrumb">
+          {{ range .Ancestors.Reverse }}
+            <a href="{{ .RelPermalink }}">{{ if .IsHome }}Home{{ else }}{{ .LinkTitle }}{{ end }}</a>
+            {{ partial "schemo/icon.html" "chevron-right" }}
+          {{ end }}
+          <span aria-current="page">{{ .LinkTitle }}</span>
+        </nav>
+      {{ end }}
+      <h1>{{ .Title }}</h1>
+      {{ with .Description }}<p>{{ . }}</p>{{ end }}
+    </header>
+    <div class="docs-prose content">
+      {{ .Content }}
+    </div>
+    {{ if .IsPage }}
+      <nav class="docs-pager" aria-label="Related pages">
+        {{ partial "components/pager.html" . }}
+      </nav>
+    {{ end }}
+  </article>
+</main>

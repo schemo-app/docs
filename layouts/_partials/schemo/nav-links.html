@@ -1,0 +1,5 @@
+<ul class="docs-nav-links">
+  {{ range .pages }}
+    <li><a href="{{ .RelPermalink }}"{{ if $.current.Eq . }} aria-current="page"{{ end }}>{{ .LinkTitle }}</a></li>
+  {{ end }}
+</ul>

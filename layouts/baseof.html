@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="{{ .Language.Lang }}">
+  {{ partial "head.html" . }}
+  <body class="schemo-docs">
+    <a class="skip-link" href="#content">Skip to content</a>
+    {{ partial "schemo/header.html" . }}
+    <div class="docs-shell">
+      <details class="mobile-nav">
+        <summary>{{ partial "schemo/icon.html" "menu" }} Browse documentation</summary>
+        {{ partial "schemo/navigation.html" . }}
+      </details>
+      <aside class="docs-sidebar">
+        {{ partial "schemo/navigation.html" . }}
+      </aside>
+      {{ block "main" . }}{{ end }}
+      {{ if .Fragments.Headings }}
+        <aside class="docs-outline" aria-label="On this page">
+          <p>{{ partial "schemo/icon.html" "menu-alt-2" }} On this page</p>
+          {{ .TableOfContents }}
+        </aside>
+      {{ end }}
+    </div>
+    {{ partial "components/search-dialog.html" . }}
+    {{ partial "scripts.html" . }}
+  </body>
+</html>
