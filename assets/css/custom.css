@@ -1,0 +1,92 @@
+:root {
+    --primary-hue: 247deg;
+    --primary-saturation: 74%;
+    --primary-lightness: 48%;
+    --schemo-frame: #dedde8;
+}
+
+.dark {
+    --primary-hue: 247deg;
+    --primary-saturation: 91%;
+    --primary-lightness: 74%;
+    --schemo-frame: #393643;
+}
+
+.schemo-home,
+.schemo-home + .hextra-cards {
+    margin-inline: auto;
+    max-width: 68rem;
+    width: 100%;
+}
+
+.schemo-hero {
+    display: grid;
+    grid-template-columns: minmax(15rem, 0.8fr) minmax(0, 1.3fr);
+    align-items: center;
+    gap: clamp(1.5rem, 4vw, 3.5rem);
+    padding-block: clamp(1.5rem, 4vw, 3rem);
+}
+
+.schemo-hero h1 {
+    font-size: clamp(2.25rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.045em;
+    overflow-wrap: normal;
+}
+
+.schemo-hero p {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-block: 1.25rem 1.5rem;
+    max-width: 32rem;
+}
+
+.schemo-hero-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+}
+
+.schemo-hero-links a:last-child {
+    text-underline-offset: 0.2em;
+    text-decoration: underline;
+}
+
+.schemo-screenshot {
+    margin-block: 1.5rem;
+    width: 100%;
+}
+
+.schemo-hero .schemo-screenshot {
+    margin-block: 0;
+}
+
+.schemo-screenshot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--schemo-frame);
+    border-radius: 0.625rem;
+}
+
+.schemo-screenshot figcaption {
+    margin-block-start: 0.6rem;
+    font-size: 0.875rem;
+}
+
+.schemo-screenshot .schemo-shot-dark,
+.dark .schemo-screenshot .schemo-shot-light {
+    display: none;
+}
+
+.dark .schemo-screenshot .schemo-shot-dark {
+    display: block;
+}
+
+@media (max-width: 760px) {
+    .schemo-hero {
+        grid-template-columns: 1fr;
+    }
+}

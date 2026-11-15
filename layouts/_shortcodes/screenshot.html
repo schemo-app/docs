@@ -1,0 +1,17 @@
+{{- $name := .Get "name" -}}
+{{- $alt := .Get "alt" -}}
+{{- $light := .Page.Resources.Get (printf "%s-light.png" $name) -}}
+{{- $dark := .Page.Resources.Get (printf "%s-dark.png" $name) -}}
+{{- if not (and $light $dark $alt) -}}
+  {{- errorf "Screenshot %q at %s requires light and dark PNGs and alt text" $name .Position -}}
+{{- else -}}
+  <figure class="schemo-screenshot">
+    <a class="schemo-shot-light" href="{{ $light.RelPermalink }}">
+      <img src="{{ $light.RelPermalink }}" width="{{ $light.Width }}" height="{{ $light.Height }}" alt="{{ $alt }}" loading="lazy">
+    </a>
+    <a class="schemo-shot-dark" href="{{ $dark.RelPermalink }}">
+      <img src="{{ $dark.RelPermalink }}" width="{{ $dark.Width }}" height="{{ $dark.Height }}" alt="{{ $alt }}" loading="lazy">
+    </a>
+    {{- with .Get "caption" }}<figcaption>{{ . }}</figcaption>{{ end }}
+  </figure>
+{{- end -}}
